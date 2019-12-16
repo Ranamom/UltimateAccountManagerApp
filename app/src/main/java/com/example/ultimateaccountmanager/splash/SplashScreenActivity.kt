@@ -1,4 +1,4 @@
-package com.example.ultimateaccountmanager
+package com.example.ultimateaccountmanager.splash
 
 import android.animation.*
 import android.content.Intent
@@ -9,6 +9,8 @@ import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.ultimateaccountmanager.MainActivity
+import com.example.ultimateaccountmanager.R
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 
@@ -35,7 +37,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     fun generateSplashAnimation() {
         splashLogoAnimation(TIMEOUT_SPLASH_SCREEN / 2)
-        splashAnimateBackground()
+//        splashAnimateBackground()
     }
 
 
@@ -45,9 +47,18 @@ class SplashScreenActivity : AppCompatActivity() {
             layout_splash,
             "backgroundColor",
             ArgbEvaluator(),
-            ContextCompat.getColor(this, R.color.colorAccent),
-            ContextCompat.getColor(this, R.color.colorPrimary),
-            ContextCompat.getColor(this, R.color.colorPrimaryDark)
+            ContextCompat.getColor(
+                this,
+                R.color.colorAccent
+            ),
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimary
+            ),
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimaryDark
+            )
 //            ContextCompat.getDrawable(this, R.drawable.teste)
         )
 
