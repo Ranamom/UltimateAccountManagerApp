@@ -5,6 +5,8 @@ import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.os.Build
+import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.LinearInterpolator
@@ -13,13 +15,20 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.ultimateaccountmanager.R
-import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class AnimationUtil {
+
+    var imageAnimationDuration: Long = 3000 //3 Segundos
+    var textLogoAnimationDuration: Long = 1500 //1.5 Segundos
 
     val valueAnimator = ValueAnimator.ofFloat()
     var animationValue: Float = 0.0f
     var stopSpamminThatShitBro: Boolean = false
+
+    var currentPlayTime: Long = 0
+    var currentTotalTime: Long = 0
+
+    var screenHeight: Float = 0.0f
 
     fun generateImageSplash(imageView: ImageView, context: Context) {
 
@@ -65,16 +74,42 @@ class AnimationUtil {
         return fadeIn
     }
 
-    fun splashLogoAnimation(startScreen: Float, finishScreen: Float, duration: Long, logoImg : ImageView, logoText : TextView, logoAnimationDuration: Long) {
+    fun saveAnimationStates(outState: Bundle) {
+        outState.putFloat("animatedValue", animationValue)
+        outState.putLong("currentPlayTime", valueAnimator.currentPlayTime)
+        outState.putBoolean("stopSpamminThatShitBro", stopSpamminThatShitBro)
+        outState.putFloat("screenHeight", screenHeight)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            outState.putLong("currentTotalTime", valueAnimator.totalDuration)
+        } else {
+            if (currentPlayTime.toInt() != 0 && currentTotalTime.toInt() != 0) {
+                outState.putLong("currentTotalTime", currentTotalTime - currentPlayTime)
+            } else {
+                outState.putLong(
+                    "currentTotalTime",
+                    imageAnimationDuration - valueAnimator.currentPlayTime
+                )
+            }
+        }
+
+    }
+
+    fun splashLogoAnimation(
+        startScreen: Float,
+        finishScreen: Float,
+        duration: Long,
+        logoImgToAnimate: ImageView,
+        logoTextToAnimate: TextView
+    ) {
 
         valueAnimator.setFloatValues(startScreen, finishScreen)
 
         /** Centralizar um pouco a imagem */
-        logoImg.translationX = -65f
+        logoImgToAnimate.translationX = -65f
 
         valueAnimator.addUpdateListener {
             animationValue = it.animatedValue as Float
-            logoImg.translationY = animationValue
+            logoImgToAnimate.translationY = animationValue
         }
 
         valueAnimator.setupStartValues()
@@ -88,8 +123,8 @@ class AnimationUtil {
 
             override fun onAnimationEnd(p0: Animator?) {
                 stopSpamminThatShitBro = true
-                logoText.startAnimation(fadeInGenerator(logoAnimationDuration))
-                logoText.alpha = 1f
+                logoTextToAnimate.startAnimation(fadeInGenerator(textLogoAnimationDuration))
+                logoTextToAnimate.alpha = 1f
             }
 
             override fun onAnimationCancel(p0: Animator?) {
