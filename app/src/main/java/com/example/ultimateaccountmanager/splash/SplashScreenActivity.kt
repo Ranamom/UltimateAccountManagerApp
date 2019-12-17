@@ -2,12 +2,11 @@ package com.example.ultimateaccountmanager.splash
 
 import android.animation.*
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
 import android.view.animation.AlphaAnimation
-import android.view.animation.AnimationSet
-import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,51 +15,101 @@ import com.bumptech.glide.Glide
 import com.example.ultimateaccountmanager.MainActivity
 import com.example.ultimateaccountmanager.R
 import kotlinx.android.synthetic.main.activity_splash_screen.*
-import kotlin.random.Random
-
+import timber.log.Timber
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val timeoutSplashScreen: Long = 6000 //3 Segundos
-    private val random = Random.nextInt(1, 100)
+    private val timeoutSplashScreen: Long = 6000 //5 Segundos
+    private val imageAnimatorDuration: Long = 3000 //3 Segundos
+    private val logoAnimationDuration: Long = 1500 //1.5 Segundos
+
+
+    private val valueAnimator = ValueAnimator.ofFloat()
+
+    private var currentPlayTime: Long = 0
+    private var currentTotalTime: Long = 0
+
+    private var stopSpamminThatShitBro: Boolean = false
+
+    private var screenHeight: Float = 0.0f
+
+    var animationValue: Float = 0.0f
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        Timber.plant(Timber.DebugTree())
 
+        /** Generate image with Glide */
+        generateImageSplash()
 
-        spl_logo_name.alpha = 0f
-        generateSplashAnimation()
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        screenHeight = displayMetrics.heightPixels.toFloat()
 
-        Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
-        }, timeoutSplashScreen)
+        Timber.i("onCreate Called. ---> ${screenHeight} ")
+
+        if (savedInstanceState == null) {
+            splashLogoAnimation(-500f, screenHeight, imageAnimatorDuration)
+            Handler().postDelayed({
+                startActivity(Intent(this, MainActivity::class.java))
+            }, timeoutSplashScreen)
+        } else {
+            currentPlayTime = savedInstanceState.getLong("currentPlayTime")
+            currentTotalTime = savedInstanceState.getLong("currentTotalTime")
+            val animatedValue = savedInstanceState.getFloat("animatedValue")
+            val screenHeightAfter = savedInstanceState.getFloat("screenHeight")
+            Timber.i("animatedValue >> ${((animatedValue) / (screenHeightAfter / screenHeight))}")
+            if (!savedInstanceState.getBoolean("stopSpamminThatShitBro")) {
+                splashLogoAnimation(
+                    ((animatedValue) / (screenHeightAfter / screenHeight)),
+                    screenHeight,
+                    (currentTotalTime - currentPlayTime)
+                )
+            } else {
+                spl_logo_img.alpha = 0f
+                spl_logo_name.alpha = 1f
+                stopSpamminThatShitBro = true
+            }
+        }
     }
 
-    fun fadeInGenarate(duration: Long): AlphaAnimation {
-        val fadeIn = AlphaAnimation(0f, 1f)
-        fadeIn.interpolator = DecelerateInterpolator()
-        fadeIn.duration = duration
-
-        return fadeIn
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putFloat("animatedValue", animationValue)
+        outState.putLong("currentPlayTime", valueAnimator.currentPlayTime)
+        outState.putBoolean("stopSpamminThatShitBro", stopSpamminThatShitBro)
+        outState.putFloat("screenHeight", screenHeight)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            outState.putLong("currentTotalTime", valueAnimator.totalDuration)
+        } else {
+            if (currentPlayTime.toInt() != 0 && currentTotalTime.toInt() != 0) {
+                outState.putLong("currentTotalTime", currentTotalTime - currentPlayTime)
+            } else {
+                outState.putLong(
+                    "currentTotalTime",
+                    imageAnimatorDuration - valueAnimator.currentPlayTime
+                )
+            }
+        }
     }
 
-    fun generateSplashAnimation() {
-        splashLogoAnimation(timeoutSplashScreen / 2)
-        splashAnimateBackground()
-    }
 
+    private fun generateImageSplash(imageView: ImageView = spl_logo_img) {
 
-    fun generateImageSplash(random: Int, direction: Int = 3, imageView: ImageView = spl_logo_img) {
+        /**
+         * Imagem gerada a partir do link
+         * https://outfits.ferobraglobal.com/animoutfit.php?id=130&addons=3&head=123&body=12&legs=23&feet=31&mount=${random}&direction=${direction}
+         */
         Glide
             .with(this)
-            .load("https://outfits.ferobraglobal.com/animoutfit.php?id=130&addons=3&head=123&body=12&legs=23&feet=31&mount=${random}&direction=${direction}")
+            .load(R.drawable.animoutfit1)
             .into(imageView)
     }
 
 
-    fun splashAnimateBackground(repeat: Int = 1, timeout: Long = timeoutSplashScreen) {
+    private fun splashAnimateBackground(repeat: Int = 1, timeout: Long = timeoutSplashScreen / 2) {
 
         val objectAnimator = ObjectAnimator.ofObject(
             layout_splash,
@@ -72,68 +121,60 @@ class SplashScreenActivity : AppCompatActivity() {
             ),
             ContextCompat.getColor(
                 this,
-                R.color.colorPrimary
-            ),
-            ContextCompat.getColor(
-                this,
                 R.color.colorPrimaryDark
             )
         )
 
-        objectAnimator.repeatCount = repeat
-        objectAnimator.repeatMode = ValueAnimator.REVERSE
+//        objectAnimator.repeatCount = repeat
+//        objectAnimator.repeatMode = ValueAnimator.REVERSE
         objectAnimator.duration = timeout / repeat
 
         objectAnimator.start()
     }
 
-    fun splashLogoAnimation(timer: Long, reverse: Boolean = false) {
+    fun fadeInGenerator(duration: Long = 1200): AlphaAnimation {
+        val fadeIn = AlphaAnimation(0f, 1f)
+        fadeIn.duration = duration
+        fadeIn.fillAfter = true
 
-        val animation = AnimationSet(false)
-        animation.addAnimation(fadeInGenarate(2000))
-        spl_logo_img.animation = animation
+        return fadeIn
+    }
 
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val screenHeight = displayMetrics.heightPixels
-//        val screenWith = displayMetrics.widthPixels
+    private fun splashLogoAnimation(startScreen: Float, finishScreen: Float, duration: Long) {
 
-        val valueAnimator = ValueAnimator.ofFloat(-screenHeight.toFloat(), screenHeight.toFloat())
-//        val valueAnimator = ValueAnimator.ofFloat(-screenWith.toFloat(), screenWith.toFloat())
+        valueAnimator.setFloatValues(startScreen, finishScreen)
+
+        /**
+         * Centralizar um pouco a imagem
+         */
+        spl_logo_img.translationX = -55f
+
         valueAnimator.addUpdateListener {
-            val value = it.animatedValue as Float
-            spl_logo_img.translationY = value
-//            spl_logo_img.translationX = value
+            animationValue = it.animatedValue as Float
+            spl_logo_img.translationY = animationValue
         }
+
+        valueAnimator.setupStartValues()
 
         valueAnimator.interpolator = LinearInterpolator()
-        valueAnimator.duration = (timer - 100)
+        valueAnimator.duration = (duration - 100)
 
-        if (reverse) {
-            generateImageSplash(random, 4)
-            valueAnimator.reverse()
-        } else {
-            valueAnimator.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(p0: Animator?) {
-                }
+        valueAnimator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
 
-                override fun onAnimationEnd(p0: Animator?) {
-                    //TODO ADD ANIMATION LOGO
-                    val animateLogo = AnimationSet(false)
-                    animateLogo.addAnimation(fadeInGenarate(1000))
-                    spl_logo_name.alpha = 1f
-                    spl_logo_name.animation = animateLogo
+            override fun onAnimationEnd(p0: Animator?) {
+                stopSpamminThatShitBro = true
+                spl_logo_name.startAnimation(fadeInGenerator(logoAnimationDuration))
+                spl_logo_name.alpha = 1f
+            }
 
-                }
+            override fun onAnimationCancel(p0: Animator?) {
+            }
 
-                override fun onAnimationCancel(p0: Animator?) {
-                }
-
-                override fun onAnimationStart(p0: Animator?) {
-                }
-            })
-            generateImageSplash(random)
-            valueAnimator.start()
-        }
+            override fun onAnimationStart(p0: Animator?) {
+            }
+        })
+        valueAnimator.start()
     }
 }

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/press_start"
         android:text="@string/app_name"
-        android:alpha="1"
+        android:alpha="0"
         android:textColor="@color/colorPrimaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
