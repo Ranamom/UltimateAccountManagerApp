@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.ultimateaccountmanager.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_listCharactersFragment"
+            app:destination="@id/listCharactersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCharactersFragment"
+        android:name="com.example.ultimateaccountmanager.ui.listcharacters.ListCharactersFragment"
+        android:label="list_characters_fragment"
+        tools:layout="@layout/list_characters_fragment" />
+</navigation>

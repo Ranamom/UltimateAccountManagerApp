@@ -7,14 +7,15 @@
     tools:context=".MainActivity">
 
 
-    <ImageView
-        android:id="@+id/player_image"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:contentDescription="@string/player_image_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <fragment
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_graph"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="45dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
