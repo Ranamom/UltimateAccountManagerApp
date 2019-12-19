@@ -35,6 +35,13 @@ class AnimationUtil {
         /**
          * Imagem gerada a partir do link
          * https://outfits.ferobraglobal.com/animoutfit.php?id=130&addons=3&head=123&body=12&legs=23&feet=31&mount=${random}&direction=${direction}
+         *
+         * mount = Montaria  (Funciona de 1 à 142)
+         * direction = Direção que o personagem está olhando
+         * 1 /\
+         * 2 >
+         * 3 \/
+         * 4 <
          */
         Glide
             .with(context)
