@@ -1,6 +1,5 @@
 package com.example.ultimateaccountmanager.network
 
-import com.example.ultimateaccountmanager.models.LoginCredentials
 import com.example.ultimateaccountmanager.models.LoginDetails
 import retrofit2.Call
 import retrofit2.http.*

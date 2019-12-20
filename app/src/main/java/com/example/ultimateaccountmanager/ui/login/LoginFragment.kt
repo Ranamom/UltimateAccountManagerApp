@@ -1,18 +1,13 @@
 package com.example.ultimateaccountmanager.ui.login
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
-import com.example.ultimateaccountmanager.MainActivity
 import com.example.ultimateaccountmanager.R
-import com.example.ultimateaccountmanager.models.LoginCredentials
 import com.example.ultimateaccountmanager.models.LoginDetails
 import com.example.ultimateaccountmanager.network.NetworkUtils
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -53,14 +48,13 @@ class LoginFragment : Fragment() {
 
         btn_login.setOnClickListener {
 
-            val username = edt_login_username.text.toString()
-            val pass = edt_login_pass.text.toString()
-            val credentials = LoginCredentials(username, pass)
+            val accountNamel = edt_login_username.text.toString()
+            val passwordl = edt_login_pass.text.toString()
 
 
             val request = NetworkUtils.getEndpoints()
 
-            request.getLoginDetails(credentials.accountNamel, credentials.passwordl)
+            request.getLoginDetails(accountNamel, passwordl)
                 .enqueue(object : Callback<LoginDetails> {
                     override fun onFailure(call: Call<LoginDetails>, t: Throwable) {
                         Timber.d("Deu bosta ai, ${t}")
@@ -70,23 +64,23 @@ class LoginFragment : Fragment() {
                         call: Call<LoginDetails>,
                         response: Response<LoginDetails>
                     ) {
-                        val hehe = response.body()
+                        val responseDetails = response.body()
 
-                        Timber.d(hehe.toString())
+                        Timber.d(responseDetails.toString())
 
-                        if (hehe!!.status.equals("error")) {
-                            hehe.msg.forEach {
+                        if (responseDetails!!.status.equals("error")) {
+                            responseDetails.msg.forEach {
                                 Toast.makeText(
                                     context,
-                                    "-> ${hehe.status} \n -> ${hehe.type} \n -> ${it}",
+                                    "-> ${responseDetails.status} \n -> ${responseDetails.type} \n -> ${it}",
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
-                        } else if (hehe!!.status.equals("success")) {
-                            hehe.msg.forEach {
+                        } else if (responseDetails!!.status.equals("success")) {
+                            responseDetails.msg.forEach {
                                 Toast.makeText(
                                     context,
-                                    "-> ${hehe.status} \n -> ${hehe.type} \n -> ${it}",
+                                    "-> ${responseDetails.status} \n -> ${responseDetails.type} \n -> ${it}",
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
