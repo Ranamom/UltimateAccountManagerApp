@@ -2,4 +2,9 @@
     <string name="app_name">Ultimate Account Manager</string>
     <string name="player_image_desc">Player Image</string>
     <string name="player_featured">Imagem Referente ao Player em Destaque</string>
+    <string name="str_sign_in">SIGN IN</string>
+    <string name="str_login_desc">Do login with our test account \n admin/admin</string>
+    <string name="str_username">Username</string>
+    <string name="str_password">Password</string>
+    <string name="str_dont_have_acc">Don\'t Have an Account? Sign Up</string>
 </resources>

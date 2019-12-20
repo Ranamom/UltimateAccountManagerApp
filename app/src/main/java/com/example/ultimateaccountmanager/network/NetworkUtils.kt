@@ -1,18 +1,20 @@
 package com.example.ultimateaccountmanager.network
 
+import okhttp3.MultipartBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetworkUtils {
+object NetworkUtils {
 
-    companion object {
+    fun getRetrofitInstance(url: String): Retrofit {
 
-        fun getRetrofitInstance(url: String): Retrofit {
-
-            return Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
+        return Retrofit.Builder()
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
+
+    fun getEndpoints() =
+        getRetrofitInstance("https://uam.codenome.com/ajax/").create(Endpoints::class.java)
 }
+

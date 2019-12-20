@@ -43,13 +43,19 @@ dependencies {
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    def nav_version = "2.1.0-rc01"
 
-    // Kotlin NAVIGATION
+    //NAVIGATION
+    def nav_version = "2.2.0-rc04"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //RETROFIT
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //ROOM
+
+    def room_version = "2.2.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
 }

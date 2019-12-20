@@ -8,7 +8,7 @@
     tools:context=".ui.listcharacters.ListCharactersFragment">
 
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/txt_login_logo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ListCharactersFragment"
