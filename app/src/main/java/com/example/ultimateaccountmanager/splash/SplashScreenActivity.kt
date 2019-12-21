@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ultimateaccountmanager.AccountDetails
 import com.example.ultimateaccountmanager.MainActivity
 import com.example.ultimateaccountmanager.R
 import com.example.ultimateaccountmanager.util.AnimationUtil
+import com.example.ultimateaccountmanager.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import timber.log.Timber
 
@@ -31,6 +33,8 @@ class SplashScreenActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         animationUtil.screenHeight = displayMetrics.heightPixels.toFloat()
 
+        val prefs = SharedPreference(applicationContext)
+
         if (savedInstanceState == null) {
             animationUtil.splashLogoAnimation(
                 -500f,
@@ -39,9 +43,15 @@ class SplashScreenActivity : AppCompatActivity() {
                 spl_logo_img,
                 spl_logo_name
             )
-            Handler().postDelayed({
-                startActivity(Intent(this, MainActivity::class.java))
-            }, timeoutSplashScreen)
+            if(prefs.retriveAccountPrefKey() == "uniqueKey"){
+                Handler().postDelayed({
+                    startActivity(Intent(this, MainActivity::class.java))
+                }, timeoutSplashScreen)
+            }else{
+                Handler().postDelayed({
+                    startActivity(Intent(this, AccountDetails::class.java))
+                }, timeoutSplashScreen)
+            }
         } else {
             /** Get saved values from savedInstanceState */
             animationUtil.currentPlayTime = savedInstanceState.getLong("currentPlayTime")

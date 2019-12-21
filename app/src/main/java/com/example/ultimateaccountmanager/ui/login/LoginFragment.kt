@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.ultimateaccountmanager.R
 import com.example.ultimateaccountmanager.models.LoginDetails
 import com.example.ultimateaccountmanager.network.NetworkUtils
+import com.example.ultimateaccountmanager.util.SharedPreference
 import kotlinx.android.synthetic.main.login_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +25,7 @@ class LoginFragment : Fragment() {
     }
 
     private lateinit var viewModel: LoginViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,22 +45,24 @@ class LoginFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        txt_login_sign_up.setOnClickListener {
-            Toast.makeText(context, "Eu ainda não fui implementado ):", Toast.LENGTH_SHORT).show()
-        }
-
         btn_login.setOnClickListener {
 
             val accountNamel = edt_login_username.text.toString()
             val passwordl = edt_login_pass.text.toString()
 
+            //SHARED PREFS
+            val prefs = SharedPreference(context)
 
             val request = NetworkUtils.getEndpoints()
 
             request.getLoginDetails(accountNamel, passwordl)
                 .enqueue(object : Callback<LoginDetails> {
                     override fun onFailure(call: Call<LoginDetails>, t: Throwable) {
-                        Timber.d("Deu bosta ai, ${t}")
+                        Toast.makeText(
+                            context,
+                            "Não foi possivel realizar o login, verifique os dados e tente novamente.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
                     override fun onResponse(
@@ -67,23 +72,15 @@ class LoginFragment : Fragment() {
                         val responseDetails = response.body()
 
                         Timber.d(responseDetails.toString())
-
-                        if (responseDetails!!.status.equals("error")) {
-                            responseDetails.msg.forEach {
-                                Toast.makeText(
-                                    context,
-                                    "-> ${responseDetails.status} \n -> ${responseDetails.type} \n -> ${it}",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        } else if (responseDetails!!.status.equals("success")) {
-                            responseDetails.msg.forEach {
-                                Toast.makeText(
-                                    context,
-                                    "-> ${responseDetails.status} \n -> ${responseDetails.type} \n -> ${it}",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                        if (response.code() == 200) {
+                            prefs.saveAccountUniqueKey(responseDetails!!.msg[0])
+                            findNavController().navigate(R.id.action_loginFragment_to_accountDetailsFragment)
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Não foi possivel realizar o login, verifique os dados e tente novamente.",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
                 })

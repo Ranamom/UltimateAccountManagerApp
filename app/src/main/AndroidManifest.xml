@@ -18,10 +18,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ListCharacters"></activity>
+        <activity android:name=".AccountDetails"></activity>
+        <activity android:name=".ListCharacters" />
         <activity android:name=".Login" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".splash.SplashScreenActivity"

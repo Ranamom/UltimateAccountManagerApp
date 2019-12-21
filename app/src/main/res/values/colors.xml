@@ -12,9 +12,15 @@
     <color name="colorPrimaryText">#ffffff</color>
 
     <!--Cores Secundárias do layout -->
-    <color name="colorAccent">#616161</color>
-    <color name="colorSecondaryLight">#8e8e8e</color>
-    <color name="colorSecondaryDark">#373737</color>
+    <color name="colorAccent">#4a148c</color>
+    <color name="colorSecondaryLight">#7c43bd</color>
+    <color name="colorSecondaryDark">#12005e</color>
     <color name="colorSecondaryText">#ffffff</color>
+
+    <!--Cores Terciárias do layout -->
+        <color name="colorTerc">#616161</color>
+        <color name="colorTerciaryLight">#8e8e8e</color>
+        <color name="colorTerciaryDark">#373737</color>
+        <color name="colorTerciaryText">#ffffff</color>
 
 </resources>

@@ -11,12 +11,12 @@
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
         <action
-            android:id="@+id/action_loginFragment_to_listCharactersFragment"
-            app:destination="@id/listCharactersFragment" />
+            android:id="@+id/action_loginFragment_to_accountDetailsFragment"
+            app:destination="@id/accountDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/listCharactersFragment"
-        android:name="com.example.ultimateaccountmanager.ui.listcharacters.ListCharactersFragment"
-        android:label="list_characters_fragment"
-        tools:layout="@layout/list_characters_fragment" />
+        android:id="@+id/accountDetailsFragment"
+        android:name="com.example.ultimateaccountmanager.ui.accountdetails.AccountDetailsFragment"
+        android:label="account_details_fragment"
+        tools:layout="@layout/account_details_fragment" />
 </navigation>

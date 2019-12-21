@@ -15,6 +15,6 @@ object NetworkUtils {
     }
 
     fun getEndpoints() =
-        getRetrofitInstance("https://uam.codenome.com/ajax/").create(Endpoints::class.java)
+        getRetrofitInstance("https://uam.codenome.com/api/v1/").create(Endpoints::class.java)
 }
 
