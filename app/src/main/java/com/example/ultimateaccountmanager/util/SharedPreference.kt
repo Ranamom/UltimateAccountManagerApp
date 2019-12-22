@@ -18,8 +18,14 @@ class SharedPreference(context: Context?) {
         edit.apply()
     }
 
-    fun retriveAccountPrefKey(): String? {
-        return sharedPref.getString(accountUniqueKey, "uniqueKey")
+    fun retriveAccountPrefKey(): String {
+        return sharedPref.getString(accountUniqueKey, "uniqueKey").toString()
+    }
+
+    fun clearAllPrefsData() {
+        val edit: SharedPreferences.Editor = sharedPref.edit()
+        edit.clear()
+        edit.apply()
     }
 }
 
