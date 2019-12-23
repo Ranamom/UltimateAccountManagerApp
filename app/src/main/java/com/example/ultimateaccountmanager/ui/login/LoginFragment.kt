@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.ultimateaccountmanager.R
@@ -38,6 +39,7 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         Timber.plant(Timber.DebugTree())
+        edt_login_username.requestFocus()
         // TODO: Use the ViewModel
     }
 
@@ -85,11 +87,6 @@ class LoginFragment : Fragment() {
                 })
 
         }
-
-//
-//        Handler().postDelayed({
-//            findNavController().navigate(R.id.action_loginFragment_to_listCharactersFragment)
-//        }, 2000)
     }
 
 }

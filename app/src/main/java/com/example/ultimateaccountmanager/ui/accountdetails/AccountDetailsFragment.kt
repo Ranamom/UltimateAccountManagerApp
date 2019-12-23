@@ -19,6 +19,7 @@ import com.example.ultimateaccountmanager.models.Account
 import com.example.ultimateaccountmanager.network.NetworkUtils
 import com.example.ultimateaccountmanager.splash.SplashScreenActivity
 import com.example.ultimateaccountmanager.util.SharedPreference
+import com.example.ultimateaccountmanager.util.Utils
 import kotlinx.android.synthetic.main.account_details_fragment.*
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
@@ -51,6 +52,8 @@ class AccountDetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        Utils.hideSoftKeyBoard(context!!, view!!)
+
         viewModel = ViewModelProviders.of(this).get(AccountDetailsViewModel::class.java)
 
         Timber.plant(Timber.DebugTree())
@@ -59,13 +62,13 @@ class AccountDetailsFragment : Fragment() {
 
                 if (account != null) {
 
-                    val premdays = if (account!!.premdays > 0) {
+                    val premdays = if (account.premdays > 0) {
                         "Premium Account"
                     } else {
                         "Free Account"
                     }
                     txt_account_details_status.text = premdays
-                    txt_account_details_name.text = account!!.name
+                    txt_account_details_name.text = account.name
                     Glide.with(view!!.context).load(R.drawable.animoutfit1)
                         .into(img_account_details_profile)
                 }

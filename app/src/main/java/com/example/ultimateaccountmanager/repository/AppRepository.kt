@@ -28,51 +28,13 @@ class AppRepository(context: Context) {
     fun getLiveAllCharacters() = database.Dao().getLiveAllCharacterData()
     fun getLiveAccountData() = database.Dao().getLiveAccountData()
 
-    fun verifyCredentials() {
-        NetworkUtils
-            .getEndpoints()
-            .getAccountDetails(prefs.retriveAccountPrefKey())
-            .enqueue(object : Callback<Account> {
-                override fun onFailure(call: Call<Account>, t: Throwable) {
-                }
-
-                override fun onResponse(call: Call<Account>, response: Response<Account>) {
-                    when {
-                        response.code() == 200 -> {
-                            val resultado = response.body()
-                            doAsync {
-                                resultado?.let { database.Dao().singleAccountInsert(it) }
-                            }
-                        }
-                        else -> {
-                            doAsync {
-                                database.Dao().deleteAllAccountData()
-                                database.Dao().deleteAllCharacterData()
-                            }
-                            Toast.makeText(
-                                cont,
-                                "Credencial Inválida, parece que você fez login em outro método, por gentileza faça login novamente.",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
-                            prefs.clearAllPrefsData()
-                        }
-                    }
-                }
-            })
-    }
-
     fun retriveAccountDataFromServer() {
         val request = NetworkUtils.getEndpoints()
 
         request.getAccountDetails(prefs.retriveAccountPrefKey())
             .enqueue(object : Callback<Account> {
                 override fun onFailure(call: Call<Account>, t: Throwable) {
-                    doAsync {
-                        database.Dao().deleteAllAccountData()
-                        database.Dao().deleteAllCharacterData()
-                    }
-                    prefs.clearAllPrefsData()
+
                 }
 
                 override fun onResponse(call: Call<Account>, response: Response<Account>) {

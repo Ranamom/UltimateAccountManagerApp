@@ -15,6 +15,5 @@ class AccountDetailsViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun getLiveAllCharacterData() = appRepository.getLiveAllCharacters()
-
     fun getLiveAccountData() = appRepository.getLiveAccountData()
 }
