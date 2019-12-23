@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context=".ui.accountdetails.AccountDetailsFragment">
+    tools:context=".ui.accountdetails.AccountDetailsFragment"
+    android:background="#ECE8E8">
 
 
     <ImageView
@@ -14,8 +15,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
 
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
 
+        android:layout_marginEnd="45dp"
         android:contentDescription="@string/acoount_details_profile_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +27,14 @@
         android:id="@+id/txt_account_details_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="45dp"
 
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/press_start"
         android:text="Name"
         android:textColor="@android:color/black"
-        android:textSize="15sp"
 
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/img_account_details_profile"
         app:layout_constraintStart_toStartOf="@+id/img_account_details_profile"
         app:layout_constraintTop_toBottomOf="@+id/img_account_details_profile" />
@@ -61,18 +64,18 @@
         tools:listitem="@layout/lista_characters_details" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_new_character"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/btn_new_character"-->
+<!--        android:layout_width="56dp"-->
+<!--        android:layout_height="56dp"-->
 
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="36dp"
-        android:src="@drawable/ic_add_new_character"
-        android:tint="@null"
+<!--        android:layout_marginEnd="40dp"-->
+<!--        android:layout_marginBottom="36dp"-->
+<!--        android:src="@drawable/ic_add_new_character"-->
+<!--        android:tint="@null"-->
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/colorSecondaryText" />
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:tint="@color/colorSecondaryText" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

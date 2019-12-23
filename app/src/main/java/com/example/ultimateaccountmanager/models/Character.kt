@@ -9,7 +9,7 @@ class Character (
     val id: Int,
     val name: String,
     val level: Int,
-    val vocation: Int,
+    val vocation: String,
     val experience: Int,
     val imageurl: String
 )

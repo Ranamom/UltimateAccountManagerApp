@@ -10,13 +10,13 @@ import com.example.ultimateaccountmanager.models.Account
 import com.example.ultimateaccountmanager.models.Character
 
 
-@Database(entities = [Account::class, Character::class], version = 2)
+@Database(entities = [Account::class, Character::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun Dao(): UltimateAccountManagerDao
 
     companion object {
-        var INSTANCE: AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
         private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {

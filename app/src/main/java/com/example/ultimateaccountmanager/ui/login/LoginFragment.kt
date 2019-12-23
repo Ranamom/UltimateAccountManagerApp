@@ -37,7 +37,6 @@ class LoginFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-
         Timber.plant(Timber.DebugTree())
         // TODO: Use the ViewModel
     }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ultimateaccountmanager.AccountDetails
 import com.example.ultimateaccountmanager.MainActivity
 import com.example.ultimateaccountmanager.R
+import com.example.ultimateaccountmanager.repository.AppRepository
 import com.example.ultimateaccountmanager.util.AnimationUtil
 import com.example.ultimateaccountmanager.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_splash_screen.*
@@ -24,6 +25,13 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
         Timber.plant(Timber.DebugTree())
 
+        val apprepository = AppRepository(applicationContext)
+        val prefs = SharedPreference(applicationContext)
+
+        if(prefs.retriveAccountPrefKey() != "uniqueKey"){
+//            apprepository.verifyCredentials()
+        }
+
         /** Generate image with Glide */
         animationUtil.generateImageSplash(spl_logo_img, applicationContext)
         animationUtil.imageAnimationDuration = 1500
@@ -33,8 +41,6 @@ class SplashScreenActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         animationUtil.screenHeight = displayMetrics.heightPixels.toFloat()
 
-        val prefs = SharedPreference(applicationContext)
-
         if (savedInstanceState == null) {
             animationUtil.splashLogoAnimation(
                 -500f,
@@ -43,11 +49,11 @@ class SplashScreenActivity : AppCompatActivity() {
                 spl_logo_img,
                 spl_logo_name
             )
-            if(prefs.retriveAccountPrefKey() == "uniqueKey"){
+            if (prefs.retriveAccountPrefKey() == "uniqueKey") {
                 Handler().postDelayed({
                     startActivity(Intent(this, MainActivity::class.java))
                 }, timeoutSplashScreen)
-            }else{
+            } else {
                 Handler().postDelayed({
                     startActivity(Intent(this, AccountDetails::class.java))
                 }, timeoutSplashScreen)
@@ -60,7 +66,8 @@ class SplashScreenActivity : AppCompatActivity() {
             val screenHeightAfter = savedInstanceState.getFloat("screenHeight")
 
             /** Proporcion to make animate 'responsive' when app rotate*/
-            val animatinScreenProporcion = ((animatedValue) / (screenHeightAfter / animationUtil.screenHeight))
+            val animatinScreenProporcion =
+                ((animatedValue) / (screenHeightAfter / animationUtil.screenHeight))
 
             if (!savedInstanceState.getBoolean("stopSpamminThatShitBro")) {
                 animationUtil.splashLogoAnimation(
@@ -76,6 +83,10 @@ class SplashScreenActivity : AppCompatActivity() {
                 animationUtil.stopSpamminThatShitBro = true
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
