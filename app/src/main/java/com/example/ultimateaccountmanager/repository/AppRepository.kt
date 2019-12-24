@@ -22,7 +22,7 @@ class AppRepository(context: Context) {
     val database = AppDatabase.getInstance(context)
     val prefs = SharedPreference(context)
     val intent: Intent =
-        Intent(context, SplashScreenActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        Intent(context, SplashScreenActivity::class.java)
     val cont: Context = context
 
     fun getLiveAllCharacters() = database.Dao().getLiveAllCharacterData()
@@ -57,6 +57,9 @@ class AppRepository(context: Context) {
                             )
                                 .show()
                             prefs.clearAllPrefsData()
+                            intent
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(cont, intent, Bundle())
                         }
                     }
