@@ -4,11 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ultimateaccountmanager.R
 import com.example.ultimateaccountmanager.models.Character
-import kotlinx.android.synthetic.main.lista_characters_details.view.*
+import com.example.ultimateaccountmanager.repository.AppRepository
+import kotlinx.android.synthetic.main.list_characters_details.view.*
+import timber.log.Timber
 
 class CharacterAdapter(val dataSet: List<Character>, val context: Context) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
@@ -18,7 +21,7 @@ class CharacterAdapter(val dataSet: List<Character>, val context: Context) :
             with(itemView) {
                 txt_character_list_lvl.text = character.level.toString()
                 txt_character_list_name.text = character.name
-                txt_character_list_vocation.text = character.vocation.toString()
+                txt_character_list_vocation.text = character.vocation
                 Glide.with(this).load(character.imageurl).into(img_character_list_profile)
             }
         }
@@ -26,7 +29,7 @@ class CharacterAdapter(val dataSet: List<Character>, val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutCharacters = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lista_characters_details, parent, false)
+            .inflate(R.layout.list_characters_details, parent, false)
 
         return ViewHolder(layoutCharacters)
     }

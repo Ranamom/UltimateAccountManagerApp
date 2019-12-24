@@ -20,5 +20,14 @@
         android:id="@+id/accountDetailsFragment"
         android:name="com.example.ultimateaccountmanager.ui.accountdetails.AccountDetailsFragment"
         android:label="account_details_fragment"
-        tools:layout="@layout/account_details_fragment" />
+        tools:layout="@layout/account_details_fragment" >
+        <action
+            android:id="@+id/action_accountDetailsFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="com.example.ultimateaccountmanager.ui.characterdetails.CharacterDetailsFragment"
+        android:label="character_details_fragment"
+        tools:layout="@layout/character_details_fragment" />
 </navigation>
