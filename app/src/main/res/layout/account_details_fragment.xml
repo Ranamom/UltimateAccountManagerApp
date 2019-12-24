@@ -10,6 +10,8 @@
     android:background="#ECE8E8">
 
 
+
+
     <ImageView
         android:id="@+id/img_account_details_profile"
         android:layout_width="100dp"
@@ -18,10 +20,12 @@
         android:layout_marginTop="30dp"
 
         android:layout_marginEnd="45dp"
-        android:contentDescription="@string/acoount_details_profile_photo"
+        android:contentDescription="@string/acount_details_profile_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <TextView
         android:id="@+id/txt_account_details_name"
@@ -31,7 +35,7 @@
 
         android:layout_marginTop="8dp"
         android:fontFamily="@font/press_start"
-        android:text="Name"
+        tools:text="@tools:sample/first_names"
         android:textColor="@android:color/black"
 
         android:textSize="15sp"
@@ -45,7 +49,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="5dp"
-        android:text="Free Account"
+        tools:text="@tools:sample/last_names"
         app:layout_constraintEnd_toEndOf="@+id/txt_account_details_name"
         app:layout_constraintStart_toStartOf="@+id/txt_account_details_name"
         app:layout_constraintTop_toBottomOf="@+id/txt_account_details_name" />
@@ -61,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_account_details_status"
         tools:itemCount="5"
-        tools:listitem="@layout/lista_characters_details" />
+        tools:listitem="@layout/list_characters_details" />
 
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
@@ -77,5 +81,11 @@
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:tint="@color/colorSecondaryText" />-->
+    <ProgressBar
+        android:id="@+id/accountDetailsProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="150dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

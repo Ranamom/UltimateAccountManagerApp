@@ -8,7 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:fontFamily">@font/odibee_sans</item>
-<!--        <item name="android:fontFamily">@font/odibee_sans</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">

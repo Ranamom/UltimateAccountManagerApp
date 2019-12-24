@@ -14,6 +14,11 @@ class AccountDetailsViewModel(application: Application) : AndroidViewModel(appli
         appRepository.retriveCharacterDataFromServer()
     }
 
+    val test : MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
     fun getLiveAllCharacterData() = appRepository.getLiveAllCharacters()
     fun getLiveAccountData() = appRepository.getLiveAccountData()
+    fun getCurrentCharacterId() = appRepository.characterCurrentId
 }

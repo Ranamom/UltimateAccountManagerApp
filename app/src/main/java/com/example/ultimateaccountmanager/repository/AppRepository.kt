@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.MutableLiveData
 import com.example.ultimateaccountmanager.database.AppDatabase
 import com.example.ultimateaccountmanager.models.Account
 import com.example.ultimateaccountmanager.models.Character
 import com.example.ultimateaccountmanager.network.NetworkUtils
 import com.example.ultimateaccountmanager.splash.SplashScreenActivity
 import com.example.ultimateaccountmanager.util.SharedPreference
+import com.example.ultimateaccountmanager.util.Utils
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,9 +23,11 @@ class AppRepository(context: Context) {
 
     val database = AppDatabase.getInstance(context)
     val prefs = SharedPreference(context)
-    val intent: Intent =
-        Intent(context, SplashScreenActivity::class.java)
     val cont: Context = context
+
+    val characterCurrentId: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     fun getLiveAllCharacters() = database.Dao().getLiveAllCharacterData()
     fun getLiveAccountData() = database.Dao().getLiveAccountData()
@@ -46,21 +50,10 @@ class AppRepository(context: Context) {
                             }
                         }
                         else -> {
-                            doAsync {
-                                database.Dao().deleteAllAccountData()
-                                database.Dao().deleteAllCharacterData()
-                            }
-                            Toast.makeText(
+                            Utils.clearAllData(
                                 cont,
-                                "Credencial Inválida, parece que você fez login em outro método, por gentileza faça login novamente.",
-                                Toast.LENGTH_LONG
+                                "Credencial Inválida, parece que você fez login em outro método, por gentileza faça login novamente."
                             )
-                                .show()
-                            prefs.clearAllPrefsData()
-                            intent
-                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                            startActivity(cont, intent, Bundle())
                         }
                     }
                 }

@@ -66,6 +66,6 @@ dependencies {
     // For Kotlin use kapt instead of annotationProcessor
 
     //ANKO
-    def anko_version='0.10.8'
+    def anko_version = '0.10.8'
     implementation "org.jetbrains.anko:anko:$anko_version"
 }
