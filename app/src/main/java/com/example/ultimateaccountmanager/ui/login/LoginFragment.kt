@@ -2,11 +2,13 @@ package com.example.ultimateaccountmanager.ui.login
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.ultimateaccountmanager.R
 import com.example.ultimateaccountmanager.models.LoginDetails
@@ -45,6 +47,10 @@ class LoginFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val prefs = SharedPreference(context)
+        if (prefs.retriveAccountPrefKey() != "uniqueKey") {
+            findNavController().navigate(R.id.action_loginFragment_to_accountDetailsFragment)
+        }
 
         btn_login.setOnClickListener {
 

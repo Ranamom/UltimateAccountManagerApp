@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.example.ultimateaccountmanager.AccountDetails
 import com.example.ultimateaccountmanager.MainActivity
 import com.example.ultimateaccountmanager.R
@@ -28,7 +29,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val apprepository = AppRepository(applicationContext)
         val prefs = SharedPreference(applicationContext)
 
-        if(prefs.retriveAccountPrefKey() != "uniqueKey"){
+        if (prefs.retriveAccountPrefKey() != "uniqueKey") {
 //            apprepository.verifyCredentials()
         }
 
@@ -49,17 +50,10 @@ class SplashScreenActivity : AppCompatActivity() {
                 spl_logo_img,
                 spl_logo_name
             )
-            if (prefs.retriveAccountPrefKey() == "uniqueKey") {
-                Handler().postDelayed({
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }, timeoutSplashScreen)
-            } else {
-                Handler().postDelayed({
-                    startActivity(Intent(this, AccountDetails::class.java))
-                    finish()
-                }, timeoutSplashScreen)
-            }
+            Handler().postDelayed({
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }, timeoutSplashScreen)
         } else {
             /** Get saved values from savedInstanceState */
             animationUtil.currentPlayTime = savedInstanceState.getLong("currentPlayTime")

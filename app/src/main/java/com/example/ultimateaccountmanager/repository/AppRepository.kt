@@ -29,6 +29,10 @@ class AppRepository(context: Context) {
         MutableLiveData<String>()
     }
 
+    fun setCharacterCurrentId(characterId: String) {
+        characterCurrentId.value = characterId
+    }
+
     fun getLiveAllCharacters() = database.Dao().getLiveAllCharacterData()
     fun getLiveAccountData() = database.Dao().getLiveAccountData()
 

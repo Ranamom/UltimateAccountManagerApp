@@ -30,12 +30,12 @@ class AccountDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.account_details_fragment, container, false)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        setHasOptionsMenu(true)
         val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
         actionBar?.show()
     }
@@ -87,17 +87,6 @@ class AccountDetailsFragment : Fragment() {
                 }
 
             }
-        val observCurrentIdCharacter = Observer<String> {
-            if (it != null) {
-                findNavController().navigate(R.id.action_accountDetailsFragment_to_characterDetailsFragment)
-            }
-        }
-
-        txt_account_details_name.setOnClickListener {
-            viewModel.test.value = 3.toString()
-        }
-
-        viewModel.test.observe(viewLifecycleOwner, observCurrentIdCharacter)
         viewModel.getLiveAccountData().observe(viewLifecycleOwner, observeAccount)
         viewModel.getLiveAllCharacterData().observe(viewLifecycleOwner, Observer { characters ->
             recyclerView.adapter = CharacterAdapter(characters, context!!)
