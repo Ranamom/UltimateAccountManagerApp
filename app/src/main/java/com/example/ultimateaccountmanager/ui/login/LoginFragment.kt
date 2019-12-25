@@ -57,9 +57,6 @@ class LoginFragment : Fragment() {
             val accountNamel = edt_login_username.text.toString()
             val passwordl = edt_login_pass.text.toString()
 
-            //SHARED PREFS
-            val prefs = SharedPreference(context)
-
             val request = NetworkUtils.getEndpoints()
 
             request.getLoginDetails(accountNamel, passwordl)
