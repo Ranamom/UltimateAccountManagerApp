@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.ultimateaccountmanager.R
+import kotlin.random.Random
 
 class AnimationUtil {
 
@@ -32,6 +33,14 @@ class AnimationUtil {
 
     fun generateImageSplash(imageView: ImageView, context: Context) {
 
+        val arr = listOf(
+            R.drawable.animoutfit,
+            R.drawable.animoutfit1,
+            R.drawable.animoutfit2,
+            R.drawable.animoutfit3,
+            R.drawable.animoutfit4
+        )
+
         /**
          * Imagem gerada a partir do link
          * https://outfits.ferobraglobal.com/animoutfit.php?id=130&addons=3&head=123&body=12&legs=23&feet=31&mount=${random}&direction=${direction}
@@ -45,7 +54,7 @@ class AnimationUtil {
          */
         Glide
             .with(context)
-            .load(R.drawable.animoutfit2)
+            .load(arr[Random.nextInt(0, arr.size)])
             .into(imageView)
     }
 

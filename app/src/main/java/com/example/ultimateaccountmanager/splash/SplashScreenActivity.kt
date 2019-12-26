@@ -17,7 +17,7 @@ import timber.log.Timber
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private var timeoutSplashScreen: Long = 1800 //5 Segundos
+    private var timeoutSplashScreen: Long = 1800 //1000 = 1 Segundo
 
     private val animationUtil = AnimationUtil()
 
@@ -25,13 +25,6 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         Timber.plant(Timber.DebugTree())
-
-        val apprepository = AppRepository(applicationContext)
-        val prefs = SharedPreference(applicationContext)
-
-        if (prefs.retriveAccountPrefKey() != "uniqueKey") {
-//            apprepository.verifyCredentials()
-        }
 
         /** Generate image with Glide */
         animationUtil.generateImageSplash(spl_logo_img, applicationContext)
@@ -79,10 +72,6 @@ class SplashScreenActivity : AppCompatActivity() {
                 animationUtil.stopSpamminThatShitBro = true
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
