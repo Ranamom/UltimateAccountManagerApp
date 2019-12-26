@@ -2,6 +2,7 @@ package com.example.ultimateaccountmanager.repository
 
 import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
@@ -25,13 +26,15 @@ class AppRepository(context: Context) {
     val prefs = SharedPreference(context)
     val cont: Context = context
 
-    val characterCurrentId: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    val characterCurrentId: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
     }
 
-    fun setCharacterCurrentId(characterId: String) {
+    fun setCharacterCurrentId(characterId: Int) {
         characterCurrentId.value = characterId
     }
+
+    fun getLiveSingleCharacterDetails(id: Int) = database.Dao().getLiveSingleCharacterDetails(id)
 
     fun getLiveAllCharacters() = database.Dao().getLiveAllCharacterData()
     fun getLiveAccountData() = database.Dao().getLiveAccountData()

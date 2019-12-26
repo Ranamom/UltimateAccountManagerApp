@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.ultimateaccountmanager.R
 import com.example.ultimateaccountmanager.commons.CharacterAdapter
@@ -81,7 +80,7 @@ class AccountDetailsFragment : Fragment() {
                     }
                     txt_account_details_status.text = premdays
                     txt_account_details_name.text = account.name.capitalize()
-                    Glide.with(view!!.context).load(R.drawable.animoutfit1)
+                    Glide.with(view!!.context).load(R.drawable.animoutfit2)
                         .into(img_account_details_profile)
                     accountDetailsProgressBar.visibility = View.GONE
                 }
@@ -89,7 +88,7 @@ class AccountDetailsFragment : Fragment() {
             }
         viewModel.getLiveAccountData().observe(viewLifecycleOwner, observeAccount)
         viewModel.getLiveAllCharacterData().observe(viewLifecycleOwner, Observer { characters ->
-            recyclerView.adapter = CharacterAdapter(characters, context!!)
+            rcv_account_details_character.adapter = CharacterAdapter(characters, context!!)
         })
     }
 }

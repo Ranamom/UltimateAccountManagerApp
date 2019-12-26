@@ -45,7 +45,7 @@ class AnimationUtil {
          */
         Glide
             .with(context)
-            .load(R.drawable.animoutfit1)
+            .load(R.drawable.animoutfit2)
             .into(imageView)
     }
 

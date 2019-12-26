@@ -25,11 +25,11 @@ class CharacterAdapter(val dataSet: List<Character>, val context: Context) :
                 txt_character_list_lvl.text = character.level.toString()
                 txt_character_list_name.text = character.name
                 txt_character_list_vocation.text = character.vocation
-                Glide.with(this).load(character.imageurl).into(img_character_list_profile)
+                Glide.with(this).load(character.imageurlanimated).into(img_character_list_profile)
                 lst_character_details.setOnClickListener {
-                    appRepository.setCharacterCurrentId(character.id.toString())
-
-                    val characterSelectedId = bundleOf("characterId" to character.id.toString())
+                    appRepository.setCharacterCurrentId(character.id)
+                    val characterSelectedId = bundleOf("characterId" to character.id)
+                    
                     findNavController().navigate(
                         R.id.action_accountDetailsFragment_to_characterDetailsFragment,
                         characterSelectedId

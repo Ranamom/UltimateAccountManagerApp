@@ -10,6 +10,19 @@
         <item name="android:fontFamily">@font/odibee_sans</item>
     </style>
 
+
+    <style name="CharacterDetailsTitleText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginStart">@dimen/dm_character_title</item>
+        <item name="android:textColor">@color/colorSecondaryDark</item>
+    </style>
+
+    <style name="CharacterDetailsText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginStart">@dimen/dm_character_title</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

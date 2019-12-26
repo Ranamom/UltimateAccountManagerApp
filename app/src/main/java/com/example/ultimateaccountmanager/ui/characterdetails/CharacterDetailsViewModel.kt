@@ -5,5 +5,19 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.ultimateaccountmanager.repository.AppRepository
 
 class CharacterDetailsViewModel(application: Application) : AndroidViewModel(application) {
-    val appRepository = AppRepository(application)
+
+    private val appRepository = AppRepository(application)
+
+    init {
+        appRepository.retriveCharacterDataFromServer()
+    }
+
+    fun setCharacterCurrentId(id: Int) {
+        appRepository.setCharacterCurrentId(id)
+    }
+
+    fun getLiveCharacterData() =
+        appRepository.getLiveSingleCharacterDetails(getCharacterCurrentId().value!!)
+
+    fun getCharacterCurrentId() = appRepository.characterCurrentId
 }

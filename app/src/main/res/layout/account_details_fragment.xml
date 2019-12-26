@@ -5,11 +5,9 @@
     android:id="@+id/accountdetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECE8E8"
     android:theme="@style/AppTheme"
-    tools:context=".ui.accountdetails.AccountDetailsFragment"
-    android:background="#ECE8E8">
-
-
+    tools:context=".ui.accountdetails.AccountDetailsFragment">
 
 
     <ImageView
@@ -26,7 +24,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <TextView
         android:id="@+id/txt_account_details_name"
         android:layout_width="wrap_content"
@@ -35,13 +32,13 @@
 
         android:layout_marginTop="8dp"
         android:fontFamily="@font/press_start"
-        tools:text="@tools:sample/first_names"
         android:textColor="@android:color/black"
-
         android:textSize="15sp"
+
         app:layout_constraintEnd_toEndOf="@+id/img_account_details_profile"
         app:layout_constraintStart_toStartOf="@+id/img_account_details_profile"
-        app:layout_constraintTop_toBottomOf="@+id/img_account_details_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/img_account_details_profile"
+        tools:text="@tools:sample/first_names" />
 
     <TextView
         android:id="@+id/txt_account_details_status"
@@ -49,14 +46,14 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="5dp"
-        tools:text="@tools:sample/last_names"
         app:layout_constraintEnd_toEndOf="@+id/txt_account_details_name"
         app:layout_constraintStart_toStartOf="@+id/txt_account_details_name"
-        app:layout_constraintTop_toBottomOf="@+id/txt_account_details_name" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_account_details_name"
+        tools:text="@tools:sample/last_names" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rcv_account_details_character"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -64,28 +61,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_account_details_status"
-        tools:itemCount="5"
+        tools:itemCount="20"
         tools:listitem="@layout/list_characters_details" />
 
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/btn_new_character"-->
-<!--        android:layout_width="56dp"-->
-<!--        android:layout_height="56dp"-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/btn_new_character"-->
+    <!--        android:layout_width="56dp"-->
+    <!--        android:layout_height="56dp"-->
 
-<!--        android:layout_marginEnd="40dp"-->
-<!--        android:layout_marginBottom="36dp"-->
-<!--        android:src="@drawable/ic_add_new_character"-->
-<!--        android:tint="@null"-->
+    <!--        android:layout_marginEnd="40dp"-->
+    <!--        android:layout_marginBottom="36dp"-->
+    <!--        android:src="@drawable/ic_add_new_character"-->
+    <!--        android:tint="@null"-->
 
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:tint="@color/colorSecondaryText" />-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:tint="@color/colorSecondaryText" />-->
+
+
     <ProgressBar
         android:id="@+id/accountDetailsProgressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="150dp"
-        />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-261dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

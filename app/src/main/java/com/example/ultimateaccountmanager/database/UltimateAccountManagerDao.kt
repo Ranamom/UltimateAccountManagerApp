@@ -31,4 +31,7 @@ interface UltimateAccountManagerDao {
 
     @Query("delete from accounts")
     fun deleteAllAccountData()
+
+    @Query("select * from character where id = :id")
+    fun getLiveSingleCharacterDetails(id: Int): LiveData<Character>
 }

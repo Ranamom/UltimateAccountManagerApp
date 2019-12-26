@@ -5,17 +5,172 @@
     android:id="@+id/characterdetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECE8E8"
     tools:context=".ui.characterdetails.CharacterDetailsFragment">
 
-    <TextView
-        android:id="@+id/txt_character_detail_name"
-        android:layout_width="wrap_content"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@tools:sample/first_names"
-        android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="105dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/img_character_details_profile">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="50dp">
+
+                <TextView
+                    android:id="@+id/txt_character_details_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@tools:sample/first_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textSize="20sp"
+
+                    app:layout_constraintEnd_toEndOf="@+id/txt_character_details_name"
+                    app:layout_constraintStart_toStartOf="@+id/txt_character_details_name"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_name"
+                    tools:text="@tools:sample/last_names" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/img_character_details_profile"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="40dp">
+
+                <ImageView
+                    android:id="@+id/img_character_details_experience"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="30dp"
+                    app:layout_constraintBottom_toTopOf="@+id/img_character_details_life"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_character_details_life"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:layout_constraintBottom_toTopOf="@+id/img_character_details_mana"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_character_details_experience" />
+
+                <ImageView
+                    android:id="@+id/img_character_details_mana"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_character_details_life" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_experience_title"
+                    style="@style/CharacterDetailsTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/img_character_details_experience"
+                    app:layout_constraintTop_toTopOf="@+id/img_character_details_experience"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_experience"
+                    style="@style/CharacterDetailsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/img_character_details_experience"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_experience_title"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_life_title"
+                    style="@style/CharacterDetailsTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/img_character_details_life"
+                    app:layout_constraintTop_toTopOf="@+id/img_character_details_life"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_life"
+                    style="@style/CharacterDetailsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintStart_toEndOf="@+id/img_character_details_life"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_life_title"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_mana_title"
+                    style="@style/CharacterDetailsTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/img_character_details_mana"
+                    app:layout_constraintTop_toTopOf="@+id/img_character_details_mana"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_mana"
+                    style="@style/CharacterDetailsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/img_character_details_mana"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_mana_title"
+                    tools:text="@tools:sample/full_names" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
