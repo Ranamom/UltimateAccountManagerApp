@@ -14,7 +14,7 @@ import com.example.ultimateaccountmanager.repository.AppRepository
 import kotlinx.android.synthetic.main.list_characters_details.view.*
 import timber.log.Timber
 
-class CharacterAdapter(val dataSet: List<Character>, val context: Context) :
+class CharacterAdapter(private val dataSet: List<Character>, val context: Context) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     val appRepository = AppRepository(context)

@@ -13,7 +13,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="70dp"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +33,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorSecondaryDark"
-                    android:textSize="30sp"
+                    android:textSize="40sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@tools:sample/first_names" />
+
+                <TextView
+                    android:id="@+id/txt_character_details_vocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="3dp"
+                    android:textSize="20sp"
+
+                    app:layout_constraintEnd_toEndOf="@+id/txt_character_details_name"
+                    app:layout_constraintStart_toStartOf="@+id/txt_character_details_name"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_name"
+                    tools:text="@tools:sample/last_names"
+                    />
 
                 <TextView
                     android:id="@+id/txt_character_details_level"
@@ -46,9 +60,9 @@
                     android:layout_marginTop="3dp"
                     android:textSize="20sp"
 
-                    app:layout_constraintEnd_toEndOf="@+id/txt_character_details_name"
-                    app:layout_constraintStart_toStartOf="@+id/txt_character_details_name"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_name"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_character_details_vocation"
+                    app:layout_constraintStart_toStartOf="@+id/txt_character_details_vocation"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_character_details_vocation"
                     tools:text="@tools:sample/last_names" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,11 +73,11 @@
 
     <ImageView
         android:id="@+id/img_character_details_profile"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
 
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -172,5 +186,14 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/characterDetailsProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="150dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-261dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

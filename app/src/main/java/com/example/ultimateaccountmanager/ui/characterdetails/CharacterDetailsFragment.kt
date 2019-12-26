@@ -1,11 +1,14 @@
 package com.example.ultimateaccountmanager.ui.characterdetails
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.ultimateaccountmanager.R
 import com.example.ultimateaccountmanager.models.Character
@@ -25,6 +28,9 @@ class CharacterDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
+        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        actionBar?.setHomeButtonEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.character_details_fragment, container, false)
     }
 
@@ -34,17 +40,22 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.logoutButton) {
-            val builder = context?.let { AlertDialog.Builder(it) }
-            builder!!.setMessage("You realy want to logoff?")
-            builder.setPositiveButton("yes") { dialog, which ->
-                Utils.clearAllData(context!!, "Logoff success!!")
+        when (item.itemId) {
+            R.id.logoutButton -> {
+                val builder = context?.let { AlertDialog.Builder(it) }
+                builder!!.setMessage("Deseja sair do sistema?")
+                builder.setPositiveButton("SAIR") { _, _ ->
+                    Utils.clearAllData(context!!)
+                }
+                builder.setNegativeButton("NÃO") { _, _ ->
+                    //do Nothing
+                }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
             }
-            builder.setNegativeButton("no") { dialog, which ->
-                //do Nothing
+            android.R.id.home -> {
+                findNavController().navigateUp()
             }
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -60,29 +71,35 @@ class CharacterDetailsFragment : Fragment() {
         }
         val observeLiveCharacterData = Observer<Character> { character ->
 
-            txt_character_details_name.text = character.name
-            txt_character_details_level.text = "Level: ${character.level}"
+            if (character != null) {
 
-            //Title set
-            txt_character_details_experience_title.text = "Experience"
-            txt_character_details_life_title.text = "Life"
-            txt_character_details_mana_title.text = "Mana"
+                characterDetailsProgressBar.visibility = View.GONE
 
-            //Character values Set
-            txt_character_details_experience.text = character.experience.toString()
-            txt_character_details_life.text = "${character.health}/${character.healthmax}"
-            txt_character_details_mana.text = "${character.mana}/${character.manamax}"
+                txt_character_details_name.text = character.name
+                txt_character_details_vocation.text = character.vocation
+                txt_character_details_level.text = "Level: ${character.level}"
 
-            //Character Image Catch
-            Glide.with(view!!.context).load(character.imageurl).circleCrop().into(img_character_details_profile)
+                //Title set
+                txt_character_details_experience_title.text = "Experience"
+                txt_character_details_life_title.text = "Life"
+                txt_character_details_mana_title.text = "Mana"
 
-            //Title icon generate
-            Glide.with(view!!.context).load(R.drawable.ic_character_experience)
-                .into(img_character_details_experience)
-            Glide.with(view!!.context).load(R.drawable.ic_character_life_potion)
-                .into(img_character_details_life)
-            Glide.with(view!!.context).load(R.drawable.ic_character_mana_potion)
-                .into(img_character_details_mana)
+                //Character values Set
+                txt_character_details_experience.text = character.experience.toString()
+                txt_character_details_life.text = "${character.health}/${character.healthmax}"
+                txt_character_details_mana.text = "${character.mana}/${character.manamax}"
+
+                //Character Image Catch
+                Glide.with(view!!.context).load(character.imageurlanimated)
+                    .into(img_character_details_profile)
+                //Title icon generate
+                Glide.with(view!!.context).load(R.drawable.ic_character_experience)
+                    .into(img_character_details_experience)
+                Glide.with(view!!.context).load(R.drawable.ic_character_life_potion)
+                    .into(img_character_details_life)
+                Glide.with(view!!.context).load(R.drawable.ic_character_mana_potion)
+                    .into(img_character_details_mana)
+            }
         }
 
         viewModel.getLiveCharacterData().observe(viewLifecycleOwner, observeLiveCharacterData)

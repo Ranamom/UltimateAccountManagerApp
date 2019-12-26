@@ -29,14 +29,16 @@ class AccountDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        actionBar?.setHomeButtonEnabled(false)
+        actionBar?.setDisplayHomeAsUpEnabled(false)
+        actionBar?.show()
         return inflater.inflate(R.layout.account_details_fragment, container, false)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         setHasOptionsMenu(true)
-        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
-        actionBar?.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -47,11 +49,11 @@ class AccountDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.logoutButton) {
             val builder = context?.let { AlertDialog.Builder(it) }
-            builder!!.setMessage("You realy want to logoff?")
-            builder.setPositiveButton("yes") { dialog, which ->
-                Utils.clearAllData(context!!, "Logoff success!!")
+            builder!!.setMessage("Deseja sair do sistema?")
+            builder.setPositiveButton("SAIR") { _, _ ->
+                Utils.clearAllData(context!!)
             }
-            builder.setNegativeButton("no") { dialog, which ->
+            builder.setNegativeButton("NÃO") { _, _ ->
                 //do Nothing
             }
             val dialog: AlertDialog = builder.create()

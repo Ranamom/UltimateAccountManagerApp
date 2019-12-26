@@ -22,8 +22,9 @@ import timber.log.Timber
 
 class AppRepository(context: Context) {
 
+    private val prefs = SharedPreference(context)
+
     val database = AppDatabase.getInstance(context)
-    val prefs = SharedPreference(context)
     val cont: Context = context
 
     val characterCurrentId: MutableLiveData<Int> by lazy {
@@ -57,10 +58,12 @@ class AppRepository(context: Context) {
                             }
                         }
                         else -> {
-                            Utils.clearAllData(
+                            Toast.makeText(
                                 cont,
-                                "Credencial Inválida, parece que você fez login em outro método, por gentileza faça login novamente."
-                            )
+                                "Você foi deslogado pois aparentemente fez login em outro dispositivo.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Utils.clearAllData(cont)
                         }
                     }
                 }

@@ -68,6 +68,7 @@
                 android:layout_marginTop="60dp"
                 android:background="@drawable/edit_text_top"
                 android:hint="@string/str_username"
+                android:imeOptions="actionNext"
                 android:inputType="textPersonName"
                 android:padding="15dp"
                 android:textAlignment="center"
@@ -83,6 +84,7 @@
                 android:background="@drawable/edit_text_bottom"
                 android:hint="@string/str_password"
                 android:inputType="textPassword"
+                android:imeOptions="actionDone"
                 android:padding="15dp"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/edt_login_username"
@@ -110,4 +112,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/loginProgressBar"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:padding="150dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-261dp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
