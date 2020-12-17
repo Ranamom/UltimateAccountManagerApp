@@ -19,8 +19,8 @@ import kotlin.random.Random
 
 class AnimationUtil {
 
-    var imageAnimationDuration: Long = 3000 //3 Segundos
-    var textLogoAnimationDuration: Long = 1500 //1.5 Segundos
+    var imageAnimationDuration: Long =  3 * 1000 //3 Segundos
+    var textLogoAnimationDuration: Double = 1.5 * 1000 //1.5 Segundos
 
     val valueAnimator = ValueAnimator.ofFloat()
     var animationValue: Float = 0.0f
@@ -82,9 +82,9 @@ class AnimationUtil {
     }
 
 
-    fun fadeInGenerator(duration: Long = 1200): AlphaAnimation {
+    fun fadeInGenerator(duration: Double = 1200.0): AlphaAnimation {
         val fadeIn = AlphaAnimation(0f, 1f)
-        fadeIn.duration = duration
+        fadeIn.duration = duration.toLong()
         fadeIn.fillAfter = true
 
         return fadeIn

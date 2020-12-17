@@ -17,7 +17,7 @@ import timber.log.Timber
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private var timeoutSplashScreen: Long = 1800 //1000 = 1 Segundo
+    private var timeoutSplashScreen: Long = 3000 //1000 = 1 Segundo
 
     private val animationUtil = AnimationUtil()
 
@@ -28,8 +28,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
         /** Generate image with Glide */
         animationUtil.generateImageSplash(spl_logo_img, applicationContext)
-        animationUtil.imageAnimationDuration = 1000
-        animationUtil.textLogoAnimationDuration = 600
+        animationUtil.imageAnimationDuration = 1500
+        animationUtil.textLogoAnimationDuration = 800.0
 
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
