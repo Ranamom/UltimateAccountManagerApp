@@ -51,7 +51,7 @@ class AccountDetailsFragment : Fragment() {
             val builder = context?.let { AlertDialog.Builder(it) }
             builder!!.setMessage("Deseja sair do sistema?")
             builder.setPositiveButton("SAIR") { _, _ ->
-                Utils.clearAllData(context!!)
+                Utils.clearAllData(requireContext())
             }
             builder.setNegativeButton("NÃO") { _, _ ->
                 //do Nothing
@@ -65,7 +65,7 @@ class AccountDetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        Utils.hideSoftKeyBoard(context!!, view!!)
+	    Utils.hideSoftKeyBoard(requireContext(), requireView())
 
         viewModel = ViewModelProviders.of(this).get(AccountDetailsViewModel::class.java)
 
@@ -82,7 +82,7 @@ class AccountDetailsFragment : Fragment() {
                     }
                     txt_account_details_status.text = premdays
                     txt_account_details_name.text = account.name.capitalize()
-                    Glide.with(view!!.context).load(R.drawable.animoutfit2)
+	                Glide.with(requireView().context).load(R.drawable.animoutfit2)
                         .into(img_account_details_profile)
                     accountDetailsProgressBar.visibility = View.GONE
                 }
@@ -90,7 +90,7 @@ class AccountDetailsFragment : Fragment() {
             }
         viewModel.getLiveAccountData().observe(viewLifecycleOwner, observeAccount)
         viewModel.getLiveAllCharacterData().observe(viewLifecycleOwner, Observer { characters ->
-            rcv_account_details_character.adapter = CharacterAdapter(characters, context!!)
+	        rcv_account_details_character.adapter = CharacterAdapter(characters, requireContext())
         })
     }
 }

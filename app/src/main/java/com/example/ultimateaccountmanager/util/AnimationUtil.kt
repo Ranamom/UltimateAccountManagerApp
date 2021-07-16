@@ -19,17 +19,17 @@ import kotlin.random.Random
 
 class AnimationUtil {
 
-    var imageAnimationDuration: Long =  3 * 1000 //3 Segundos
-    var textLogoAnimationDuration: Double = 1.5 * 1000 //1.5 Segundos
+	var imageAnimationDuration: Long = 3 * 1000 //3 secs
+	var textLogoAnimationDuration: Double = 1.5 * 1000 //1.5 secs
 
-    val valueAnimator = ValueAnimator.ofFloat()
-    var animationValue: Float = 0.0f
-    var stopSpamminThatShitBro: Boolean = false
+	val valueAnimator = ValueAnimator.ofFloat()
+	var animationValue: Float = 0.0f
+	var stopSpamminThatShitBro: Boolean = false
 
-    var currentPlayTime: Long = 0
-    var currentTotalTime: Long = 0
+	var currentPlayTime: Long = 0
+	var currentTotalTime: Long = 0
 
-    var screenHeight: Float = 0.0f
+	var screenHeight: Float = 0.0f
 
     fun generateImageSplash(imageView: ImageView, context: Context) {
 
@@ -42,11 +42,11 @@ class AnimationUtil {
         )
 
         /**
-         * Imagem gerada a partir do link
+         * Image generated with
          * https://outfits.ferobraglobal.com/animoutfit.php?id=130&addons=3&head=123&body=12&legs=23&feet=31&mount=${random}&direction=${direction}
          *
-         * mount = Montaria  (Funciona de 1 à 142)
-         * direction = Direção que o personagem está olhando
+         * mount = Mount  (Works from 1 to 142)
+         * direction = Direction where character was looking
          * 1 /\
          * 2 >
          * 3 \/
@@ -120,7 +120,7 @@ class AnimationUtil {
 
         valueAnimator.setFloatValues(startScreen, finishScreen)
 
-        /** Centralizar um pouco a imagem */
+	    /** Center image */
         logoImgToAnimate.translationX = -65f
 
         valueAnimator.addUpdateListener {

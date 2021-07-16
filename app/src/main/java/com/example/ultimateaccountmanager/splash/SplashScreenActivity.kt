@@ -5,40 +5,41 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import com.example.ultimateaccountmanager.AccountDetails
 import com.example.ultimateaccountmanager.MainActivity
 import com.example.ultimateaccountmanager.R
-import com.example.ultimateaccountmanager.repository.AppRepository
 import com.example.ultimateaccountmanager.util.AnimationUtil
-import com.example.ultimateaccountmanager.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import timber.log.Timber
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private var timeoutSplashScreen: Long = 3000 //1000 = 1 Segundo
+	/** Timer to how long app will show the splash screen*/
+	private var timeoutSplashScreen: Long = 3000 //1000 = 1 Segundo
 
-    private val animationUtil = AnimationUtil()
+	/** Stores value to animation utilities*/
+	private val animationUtil = AnimationUtil()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
-        Timber.plant(Timber.DebugTree())
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_splash_screen)
+		/** Activate logs*/
+		Timber.plant(Timber.DebugTree())
 
-        /** Generate image with Glide */
-        animationUtil.generateImageSplash(spl_logo_img, applicationContext)
-        animationUtil.imageAnimationDuration = 1500
-        animationUtil.textLogoAnimationDuration = 800.0
+		/** Generate image with Glide */
+		animationUtil.generateImageSplash(spl_logo_img, applicationContext)
+		/** Animation Image Duration (When image appears 'walking') */
+		animationUtil.imageAnimationDuration = 1500
+		/** Animation Image Duration */
+		animationUtil.textLogoAnimationDuration = 800.0
 
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        animationUtil.screenHeight = displayMetrics.heightPixels.toFloat()
+		val displayMetrics = DisplayMetrics()
+		windowManager.defaultDisplay.getMetrics(displayMetrics)
+		animationUtil.screenHeight = displayMetrics.heightPixels.toFloat()
 
-        if (savedInstanceState == null) {
-            animationUtil.splashLogoAnimation(
-                -500f,
-                animationUtil.screenHeight,
+		if (savedInstanceState == null) {
+			animationUtil.splashLogoAnimation(
+				-500f,
+				animationUtil.screenHeight,
                 animationUtil.imageAnimationDuration,
                 spl_logo_img,
                 spl_logo_name
@@ -54,7 +55,7 @@ class SplashScreenActivity : AppCompatActivity() {
             val animatedValue = savedInstanceState.getFloat("animatedValue")
             val screenHeightAfter = savedInstanceState.getFloat("screenHeight")
 
-            /** Proporcion to make animate 'responsive' when app rotate*/
+			/** Proportion to make animate 'responsive' when app rotate*/
             val animatinScreenProporcion =
                 ((animatedValue) / (screenHeightAfter / animationUtil.screenHeight))
 
@@ -75,7 +76,8 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        animationUtil.saveAnimationStates(outState)
+	    super.onSaveInstanceState(outState)
+	    /** Stores animation states into bundle */
+	    animationUtil.saveAnimationStates(outState)
     }
 }
